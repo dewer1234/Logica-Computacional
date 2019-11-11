@@ -1,0 +1,60 @@
+
+%Brandon Padilla Ruiz.
+%brandon.padilla.r@ciencias.unam.mx
+%312139805
+
+%Especificación lógica de los número naturales.
+nat(cero).
+nat(suc(N)) :- nat(N).
+
+%Especificación lógica de la suma de dos número naturales.
+suma(cero,N,N).
+suma(suc(N),M,suc(NM)) :- suma(N,M,NM).
+
+%Especificación lógica de el producto de dos números naturales.
+prod(cero,_,cero).
+prod(suc(N),M,K) :- suma(NM,M,K),prod(N,M,NM).
+
+%Especificación lógica de el factorial de un número.
+factorial(cero,suc(cero)).
+factorial(suc(N),M) :- prod(suc(N),K,M),factorial(N,K).
+
+%Especificación lógica de la potencia de un número.
+potencia(_,cero,suc(cero)).
+potencia(N,suc(M),R) :- prod(K,N,R),potencia(N,M,K).
+
+%Especificación lógica de menor.
+menor(cero,suc(_)).
+menor(suc(N),suc(M)) :- menor(N,M).
+
+%Especificación lógica de igual.
+igual(cero,cero).
+igual(suc(N),suc(M)) :- igual(N,M).
+
+%Especificación lógica de elem.
+elem(X,[X|_]).
+elem(X,[_|XS]) :- elem(X,XS).
+
+%Especificación lógica de la concatenación de una lista.
+conct([],L,L).
+conct([X|XS],L,[X|YS]) :- conct(XS,L,YS).
+
+%Especificación lógica de la reversa de una lista.
+reversa([],[]).
+reversa([X|XS],L) :- conct(Y,[X],L),reversa(XS,Y).
+
+%Especificación lógica de palindroma.
+palindroma(X) :- reversa(X,X).
+
+%Especificación lógica de ultimo.
+ultimo([X],X).
+ultimo([_|XS],X) :- ultimo(XS,X).
+
+%Especificación lógica de la longitud de una lista.
+long([],cero).
+long([_|XS],suc(N)) :- long(XS,N).
+
+%Especificación lógica de elimina.
+elimina(_,[],[]).
+elimina(X,[X|XS],L) :- elimina(X,XS,L).
+elimina(X,[Y|XS],[Y|L]) :- elimina(X,XS,L).
